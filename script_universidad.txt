@@ -1,1 +1,32 @@
-create database Universidad;
+CREATE DATABASE Universidad;
+USE Universidad;
+
+CREATE TABLE Medico(clave INT(11) NOT NULL,	
+		departamento VARCHAR(15) NOT NULL,	
+		especialidad VARCHAR(10) NOT NULL,	
+		nombre VARCHAR(10) NOT NULL,	
+		PRIMARY KEY(clave));	
+
+
+CREATE table Pacientes(folio INT(11) NOT NULL,	
+		nombre VARCHAR(15) NOT NULL,	
+		diagnostico VARCHAR(15) NOT NULL,
+		PRIMARY KEY(folio));
+
+Create TABLE Atiende(fecha Date,
+	
+		tratamiento VARCHAR(10) NOT NULL,
+		diagnostico VARCHAR(10) NOT NULL,
+		nomedico INT(11) NOT NULL,
+		nopaciente INT(11) NOT NULL,
+		foreign key(nomedico) references Medico(clave),
+		foreign key(nopaciente) references Pacientes(folio));
+
+CREATE TABLE examen(nomedico INT(11) NOT NULL,
+		nopaciente INT(11) NOT NULL,	
+		pruebas VARCHAR(10) NOT NULL,	
+		analisis VARCHAR(10) NOT NULL,
+		fecha Date,
+		fechaentrega DATE,	
+		foreign key(nomedico) references Medico(clave),
+		foreign key(nopaciente) references Pacientes(folio));
