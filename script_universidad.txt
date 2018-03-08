@@ -1,32 +1,38 @@
 CREATE DATABASE Universidad;
 USE Universidad;
 
-CREATE TABLE Medico(clave INT(11) NOT NULL,	
-		departamento VARCHAR(15) NOT NULL,	
-		especialidad VARCHAR(10) NOT NULL,	
-		nombre VARCHAR(10) NOT NULL,	
+CREATE TABLE Profesor(clave INT(11) NOT NULL,	
+		nombre VARCHAR(15) NOT NULL,	
+		domicilio VARCHAR(10) NOT NULL,	
+		salario INT(11) NOT NULL,
+		fecha_nac DATE,	
 		PRIMARY KEY(clave));	
 
 
-CREATE table Pacientes(folio INT(11) NOT NULL,	
-		nombre VARCHAR(15) NOT NULL,	
+CREATE table Especialidad(clave_p INT(11) NOT NULL,	
+		titulo VARCHAR(15) NOT NULL,	
 		diagnostico VARCHAR(15) NOT NULL,
-		PRIMARY KEY(folio));
+		foreign key(clave_p) references Profesor(clave));
 
-Create TABLE Atiende(fecha Date,
-	
-		tratamiento VARCHAR(10) NOT NULL,
-		diagnostico VARCHAR(10) NOT NULL,
-		nomedico INT(11) NOT NULL,
-		nopaciente INT(11) NOT NULL,
-		foreign key(nomedico) references Medico(clave),
-		foreign key(nopaciente) references Pacientes(folio));
+CREATE TABLE Departamento(numero INT(11) NOT NULL,	
+		nombre VARCHAR(15) NOT NULL,	
+		clave_pro VARCHAR(10) NOT NULL,		
+		foreign key(clave_pro) references Profesor(clave));
 
-CREATE TABLE examen(nomedico INT(11) NOT NULL,
-		nopaciente INT(11) NOT NULL,	
-		pruebas VARCHAR(10) NOT NULL,	
-		analisis VARCHAR(10) NOT NULL,
-		fecha Date,
-		fechaentrega DATE,	
-		foreign key(nomedico) references Medico(clave),
-		foreign key(nopaciente) references Pacientes(folio));
+CREATE TABLE Administra(cla_p INT(11) NOT NULL,	
+		lugar VARCHAR(15) NOT NULL,	
+		fecha DATE,		
+		foreign key(cla_p) references Profesor(cla_p));
+
+CREATE TABLE Curso(clave_c INT(11) NOT NULL,	
+		nombre VARCHAR(15) NOT NULL,	
+		semestre VARCHAR(10) NOT NULL,	
+		PRIMARY KEY(clave_c));
+
+CREATE TABLE Alumno(matricula INT(11) NOT NULL,	
+		nombre VARCHAR(15) NOT NULL,	
+		carrera VARCHAR(10) NOT NULL,	
+		direccion INT(11) NOT NULL,
+		telefono INT(10) NOT NULL,	
+		plan INT(20) NOT NULL,			
+		PRIMARY KEY(matricula));
